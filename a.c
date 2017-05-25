@@ -5,6 +5,7 @@ void main(void)
 {
 	printf("hello¥n");
 //3rd
+//second
 }
 
 int plus(int a, int b)
