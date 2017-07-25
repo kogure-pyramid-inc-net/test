@@ -129,7 +129,7 @@
         var_dump($ret);
     }
 
-    //
+    //こんなのしか方法ないのかなあ
     function test_arrayTransposeWithKey()
     {
         $array = [
