@@ -77,12 +77,32 @@
     function test_arrayserch()
     {
         $ary = [
-            ['id'=>0,'fruit'=>'apple','name'=>'aaa'],
-            ['id'=>10,'fruit'=>'banana','name'=>'bbb'],
+            ['id'=>'id0','fruit'=>'apple','name'=>'aaa'],
+            ['id'=>'id10','fruit'=>'banana','name'=>'bbb'],
+            ['id'=>'id20','fruit'=>'banana','name'=>'ccc'],
         ];
 
+        var_dump(array_column($ary,'fruit'));
+
+        //最初に見つかったやつ一つだけ返す
         $ret = $ary[array_search('banana',array_column($ary,'fruit'))];
 
+        var_dump($ret);
+
+        //全部返す(結局これが最強か)
+        $compare_property = 'fruit';
+        $compare_value = 'banana';
+        $ret = array_filter($ary,
+                            function ($arg_array_v) use ($compare_property, $compare_value)
+                            {
+                                return($arg_array_v[$compare_property] == $compare_value);
+                            }
+        );
+
+        var_dump($ret);
+
+        //全部だけどキーの配列だけ返す
+        $ret = array_keys(array_column($ary,'fruit'),'banana');
         var_dump($ret);
     }
 
@@ -92,6 +112,7 @@
         $ary = [
             (object)['id'=>0,'fruit'=>'apple','name'=>'aaa'],
             (object)['id'=>10,'fruit'=>'banana','name'=>'bbb'],
+            (object)['id'=>20,'fruit'=>'banana','name'=>'ccc'],
         ];
 
         $compare_property = 'fruit';
